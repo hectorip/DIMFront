@@ -1,0 +1,84 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view1">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+      paper-button.indigo {
+        background-color: var(--paper-indigo-800);
+        color: white;
+      }
+    </style>
+    <firebase-app 
+      auth-domain="dimexico-e2e01.firebaseapp.com"
+      database-url="https://dimexico-e2e01.firebaseio.com"
+      api-key="AIzaSyC9ZMHEGy_x8QOer45C0hbVRhTW7lV3ce0"
+      storage-bucket="dimexico-e2e01.appspot.com",
+      messagin-sender-id="24935489876">
+    </firebase-app>
+    <firebase-auth id="auth" user="{{user}}" provider="google" on-error="handleError">
+    </firebase-auth>
+
+    <div class="card">
+      <h1>My Donations</h1>
+
+      <paper-button raised class="indigo" on-tap="firebase_login">
+        Login
+      </paper-button>
+      <br>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Details</th>
+        </tr>
+        <tr>
+          <td>03-27-2017</td>
+          <td>$10,000 USD</td>
+          <td>Promised</td>
+          <td><a href="">Details</a></td>
+        </tr>
+      </table>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-view1',
+      properties: {
+        auth: {type: Object, notify: true, reflectToAttribute: true}
+      },
+      firebase_login: function(){
+        this.$.auth.signInWithPopup()
+            .then(function(response) {// successful authentication response here
+              console.log("yes")
+            })
+            .catch(function(error) {// unsuccessful authentication response here
+              console.log("noooo")
+            });
+      },
+      handleError: function(e){
+        console.log(e)
+      }
+    });
+  </script>
+</dom-module>
