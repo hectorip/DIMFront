@@ -69,11 +69,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       firebase_login: function(){
         this.$.auth.signInWithPopup()
-            .then(function(response) {// successful authentication response here
-              console.log("yes")
+            .then(function(response) {
+              console.log(this.user);
             })
-            .catch(function(error) {// unsuccessful authentication response here
-              console.log("noooo")
+            .catch(function(error) {
             });
       },
       handleError: function(e){
