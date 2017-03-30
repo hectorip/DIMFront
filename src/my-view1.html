@@ -38,12 +38,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </firebase-auth>
 
     <div class="card">
-      <h1>My Donations</h1>
-
+      <h1>Donations</h1>
+      <p> Verify here the status of your donations and how had we used it.</p>
       <paper-button raised class="indigo" on-tap="firebase_login">
         Login
       </paper-button>
+
       <br>
+      <br>
+
       <table>
         <tr>
           <th>Date</th>
@@ -73,6 +76,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               console.log(this.user);
             })
             .catch(function(error) {
+              console.log("Error login")
             });
       },
       handleError: function(e){
